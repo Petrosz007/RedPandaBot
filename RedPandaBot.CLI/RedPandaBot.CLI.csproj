@@ -7,4 +7,14 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <None Include=".github\dependabot.yml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="DSharpPlus" Version="4.2.0-nightly-01018" />
+      <PackageReference Include="DSharpPlus.Interactivity" Version="4.2.0-nightly-01018" />
+      <PackageReference Include="DSharpPlus.SlashCommands" Version="4.2.0-nightly-01018" />
+    </ItemGroup>
+
 </Project>
