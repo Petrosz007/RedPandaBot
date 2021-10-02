@@ -21,6 +21,7 @@
             }
         }
 
+        // Bot main logic
         public async Task RunAsync()
         {
             // Grab ConfigJson and deserialize - helps to keep token hidden.
