@@ -16,4 +16,4 @@ global using Newtonsoft.Json;
 global using Serilog;
 global using Serilog.Extensions.Logging;
 global using Microsoft.Extensions.Logging;
-global using Newtonsoft.Json;
+global using RedPandaBot.Configuration;
