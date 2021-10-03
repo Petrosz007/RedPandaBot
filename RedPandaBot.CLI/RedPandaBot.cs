@@ -3,10 +3,10 @@
     public class RedPandaBot
     {
         public DiscordShardedClient? ShardedClient { get; private set; }
-        public InteractivityExtension? Interactivity { get; private set; }
-        public SlashCommandsExtension? SlashCommands { get; private set; }
-        public static ConfigJson Config = new ConfigJson();
-        public static readonly EventId BotEventId = new EventId(1);
+        private InteractivityExtension? Interactivity { get; }
+        private SlashCommandsExtension? SlashCommands { get; }
+        private static ConfigJson Config = new ConfigJson();
+        private static readonly EventId BotEventId = new EventId(1);
 
         public async Task RunAsync()
         {
