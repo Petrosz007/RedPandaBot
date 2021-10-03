@@ -8,12 +8,12 @@ namespace RedPandaBot.CLI
 {
     internal class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var bot = new RedPandaBot();
             try
             {
-                bot.RunAsync().GetAwaiter().GetResult();
+                await bot.RunAsync();
             }
             catch (Exception ex)
             {
