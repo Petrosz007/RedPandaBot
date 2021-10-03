@@ -1,4 +1,4 @@
-﻿namespace RedPandaBot.Configuration
+﻿namespace RedPandaBot.CLI.Configuration
 {
     public struct ConfigJson
     {
