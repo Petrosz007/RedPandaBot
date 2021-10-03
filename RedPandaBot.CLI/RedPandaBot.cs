@@ -8,20 +8,6 @@
         public static ConfigJson Config = new ConfigJson();
         public static readonly EventId BotEventId = new EventId(1);
 
-        public static void Main(string[] args)
-        {
-            var bot = new RedPandaBot();
-            try
-            {
-                bot.RunAsync().GetAwaiter().GetResult();
-            }
-            catch (Exception ex)
-            {
-                Log.Logger.Fatal($"{ex.Message} | {ex.StackTrace}");
-            }
-        }
-
-        // Bot main logic
         public async Task RunAsync()
         {
             // Grab ConfigJson and deserialize - helps to keep token hidden.
