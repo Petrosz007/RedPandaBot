@@ -1,4 +1,4 @@
-﻿namespace RedPandaBot
+﻿namespace RedPandaBot.CLI
 {
     public class RedPandaBot
     {
