@@ -2,18 +2,21 @@
 
 public class DiscordBot : IHostedService
 {
-    public DiscordShardedClient? ShardedClient { get; private set; }
     private InteractivityExtension? Interactivity { get; }
     private SlashCommandsExtension? SlashCommands { get; }
-    
     private static readonly EventId BotEventId = new(1);
-    private readonly Config config;
-    private readonly ILoggerFactory loggerFactory;
+    private readonly DiscordShardedClient ShardedClient;
 
     public DiscordBot(Config config, ILoggerFactory loggerFactory)
     {
-        this.config = config;
-        this.loggerFactory = loggerFactory;
+        ShardedClient = new(new()
+        {
+            Token = config.Token,
+            TokenType = TokenType.Bot,
+            AutoReconnect = true,
+            LoggerFactory = loggerFactory,
+            Intents = DiscordIntents.AllUnprivileged,
+        });
     }
 
     public async Task StartAsync(CancellationToken cancellationToken)
@@ -28,23 +31,15 @@ public class DiscordBot : IHostedService
         }
     }
 
-    public Task StopAsync(CancellationToken cancellationToken)
+    public async Task StopAsync(CancellationToken cancellationToken)
     {
-        return Task.CompletedTask;
+        Log.Information("Stopping the Discord bot...");
+        await ShardedClient.StopAsync();
     }
 
     private async Task RunAsync(CancellationToken cancellationToken)
     {
-        ShardedClient = new DiscordShardedClient(new DiscordConfiguration()
-        {
-            Token = config.Token,
-            TokenType = TokenType.Bot,
-            AutoReconnect = true,
-            LoggerFactory = loggerFactory,
-            Intents = DiscordIntents.AllUnprivileged,
-        });
-
-        await ShardedClient.UseInteractivityAsync(new InteractivityConfiguration()
+        await ShardedClient.UseInteractivityAsync(new()
         {
             Timeout = TimeSpan.FromSeconds(60),
             PollBehaviour = PollBehaviour.KeepEmojis,
@@ -70,11 +65,9 @@ public class DiscordBot : IHostedService
         // Client, Slash Command and error event binding will happen here
 
         Log.Information("Connecting to Discord..");
-        await ShardedClient.StartAsync().ConfigureAwait(false);
+        await ShardedClient.StartAsync();
+
         Log.Information("Connected to Discord successfully!");
-
         Log.Information($"Bot version {Assembly.GetExecutingAssembly().GetName().Version}");
-
-        await Task.Delay(-1, cancellationToken).ConfigureAwait(false);
     }
 }
