@@ -19,4 +19,7 @@ global using Serilog.Events;
 global using Serilog.Extensions.Logging;
 global using Serilog.Sinks.SystemConsole.Themes;
 global using Microsoft.Extensions.Logging;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Hosting;
+global using RedPandaBot.CLI;
 global using RedPandaBot.CLI.Configuration;
