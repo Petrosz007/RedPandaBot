@@ -6,9 +6,12 @@ public class DiscordBot : IHostedService
     private SlashCommandsExtension? SlashCommands { get; }
     private static readonly EventId BotEventId = new(1);
     private readonly DiscordShardedClient ShardedClient;
+    private readonly Config Config;
 
     public DiscordBot(Config config, ILoggerFactory loggerFactory)
     {
+        Config = config;
+
         ShardedClient = new(new()
         {
             Token = config.Token,
@@ -61,6 +64,7 @@ public class DiscordBot : IHostedService
         var slashCommandsConfig = await ShardedClient.UseSlashCommandsAsync();
 
         // Command registration will go here
+        slashCommandsConfig.RegisterCommands<HelloModule>(Config.TestServerId);
 
         // Client, Slash Command and error event binding will happen here
 

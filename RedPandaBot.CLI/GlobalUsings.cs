@@ -23,3 +23,5 @@ global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Hosting;
 global using RedPandaBot.CLI;
 global using RedPandaBot.CLI.Configuration;
+global using RedPandaBot.CLI.Commands;
+
